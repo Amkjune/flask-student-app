@@ -5,7 +5,7 @@ from mysql.connector import connection
 app = Flask(__name__)
 
 # MySQL connection
-cnx = connection.MySQLConnection(user='root', password='Ammy@123', host='127.0.0.1', database='mydb')
+cnx = connection.MySQLConnection(user='root', password='Ammy@123', host='host.docker.internal', database='mydb')
 cursor = cnx.cursor()
 
 # Create table if not exists
@@ -44,4 +44,4 @@ def show_students():
     return f"<h2>Students:</h2>" + "<br>".join(str(row) for row in records)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
