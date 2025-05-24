@@ -27,4 +27,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: yourdockerhubusername/flask-mysql-app:latest
+          tags: amanpreet23/flask-student-app:latest
