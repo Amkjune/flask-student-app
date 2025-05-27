@@ -34,4 +34,4 @@ def show_students():
     #return f"<h2>Students:</h2>" + "<br>".join(str(row) for row in records)
 
 if __name__ == '__main__':
-    app.run(host="host.docker.internal", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
