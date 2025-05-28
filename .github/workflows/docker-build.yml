@@ -60,5 +60,7 @@ jobs:
             --dns-name-label flask-student-app-${{ github.run_number }} \
             --ports 5000 \
             --os-type Linux \
+            --cpu 1 \
+            --memory 1.5 \
             --location "Canada Central" \
             --restart-policy Never
