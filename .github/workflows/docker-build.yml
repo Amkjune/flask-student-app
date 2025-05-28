@@ -6,6 +6,11 @@ on:
       - main
       - feature
 
+permissions:
+  id-token: write     # ✅ Required for OIDC
+  contents: read      # ✅ Required to checkout repo
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
