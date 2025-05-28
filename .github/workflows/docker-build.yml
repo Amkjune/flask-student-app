@@ -59,5 +59,6 @@ jobs:
             --registry-password ${{ secrets.ACR_PASSWORD }} \
             --dns-name-label flask-student-app-${{ github.run_number }} \
             --ports 5000 \
+            --os-type Linux \
             --location "Canada Central" \
             --restart-policy Never
