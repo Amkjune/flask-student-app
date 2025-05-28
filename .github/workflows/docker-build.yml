@@ -30,3 +30,29 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/flask-student-app:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+      - name: Deploy to Azure Container Instances
+        run: |
+          az container create \
+            --name flask-student-app \
+            --resource-group aman-test \
+            --image ${{ secrets.ACR_LOGIN_SERVER }}/flask-student-app:latest
+            --registry-login-server ${{ secrets.ACR_LOGIN_SERVER }} \
+            --registry-username ${{ secrets.ACR_USERNAME }} \
+            --registry-password ${{ secrets.ACR_PASSWORD }} \
+            --dns-name-label flask-student-app-${{ github.run_number }} \
+            --ports 5000 \
+            --location Canada Central \
+            --restart-policy Never
